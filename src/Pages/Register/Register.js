@@ -7,11 +7,25 @@ import RiderForm from "../Shared/RiderForm/RiderForm";
 const Register = () => {
   const [signUpType, setSignUpType] = useState("");
   const { register, handleSubmit, reset } = useForm();
-  // all liscense states
+  // all license states
   const [license, setLicense] = useState(null);
   const [finalLicense, setFinalLicense] = useState("");
   const [readLicense, setreadLicense] = useState(null);
   const licenseRef = useRef();
+
+  // all states for NId
+  const [nid, setNid] = useState(null);
+  const [finalNid, setFinalNid] = useState("");
+  const [readNid, setreadNid] = useState(null);
+  const nidRef = useRef();
+
+  // all states for Profile
+  const [profile, setProfile] = useState(null);
+  const [finalProfile, setFinalProfile] = useState("");
+  const [readProfile, setreadProfile] = useState(null);
+  const profileRef = useRef();
+
+  console.log("nid", finalNid, "Pro", finalProfile, "Li", finalLicense);
 
   // upload license
   useEffect(() => {
@@ -26,7 +40,33 @@ const Register = () => {
     }
   }, [license]);
 
-  // get license
+  // upload Nid picture
+  useEffect(() => {
+    if (nid) {
+      const formData = new FormData();
+      formData.append("image", nid);
+      axios({
+        method: "post",
+        url: "https://api.imgbb.com/1/upload?key=b8e0c953a6b98e5a101ba8a93b2ceb77",
+        data: formData,
+      }).then((data) => setFinalNid(data.data.data.url));
+    }
+  }, [nid]);
+
+  // upload profile picture
+  useEffect(() => {
+    if (profile) {
+      const formData = new FormData();
+      formData.append("image", profile);
+      axios({
+        method: "post",
+        url: "https://api.imgbb.com/1/upload?key=b8e0c953a6b98e5a101ba8a93b2ceb77",
+        data: formData,
+      }).then((data) => setFinalProfile(data.data.data.url));
+    }
+  }, [profile]);
+
+  // get license picture
   const handelLicence = (e) => {
     setLicense(e.target.files[0]);
     const reader = new FileReader();
@@ -35,6 +75,30 @@ const Register = () => {
     }
     reader.onload = (readerEvent) => {
       setreadLicense(readerEvent.target.result);
+    };
+  };
+
+  // get Nid picture
+  const handelNid = (e) => {
+    setNid(e.target.files[0]);
+    const reader = new FileReader();
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+    reader.onload = (readerEvent) => {
+      setreadNid(readerEvent.target.result);
+    };
+  };
+
+  // get profile picture
+  const handelProfile = (e) => {
+    setProfile(e.target.files[0]);
+    const reader = new FileReader();
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+    reader.onload = (readerEvent) => {
+      setreadProfile(readerEvent.target.result);
     };
   };
 
@@ -103,12 +167,22 @@ const Register = () => {
             <RiderForm
               onSubmit={onSubmit}
               handelLicence={handelLicence}
+              handelNid={handelNid}
               register={register}
               handleSubmit={handleSubmit}
               readLicense={readLicense}
               licenseRef={licenseRef}
+              readNid={readNid}
+              nidRef={nidRef}
+              nid={nid}
+              setNid={setNid}
               setLicense={setLicense}
               license={license}
+              setProfile={setProfile}
+              readProfile={readProfile}
+              profile={profile}
+              profileRef={profileRef}
+              handelProfile={handelProfile}
             />
           </div>
         </div>

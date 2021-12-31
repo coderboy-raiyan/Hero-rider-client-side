@@ -11,6 +11,16 @@ const RiderForm = ({
   setLicense,
   licenseRef,
   license,
+  handelNid,
+  readNid,
+  nidRef,
+  setNid,
+  nid,
+  setProfile,
+  readProfile,
+  profile,
+  profileRef,
+  handelProfile,
 }) => {
   return (
     <div>
@@ -62,33 +72,95 @@ const RiderForm = ({
               className="form-input"
             />
           </div>
-          {/* License field */}
-          <div>
-            <div className="hover:bg-slate-200 cursor-pointer w-44 h-20 bg-white border rounded flex justify-center items-center">
-              {license ? (
-                <div className="relative hover:opacity-40">
-                  <RiCloseCircleFill
-                    onClick={() => setLicense(null)}
-                    className="-inset-y-4 absolute inset-x-40 text-red-500 text-2xl hover:scale-110"
-                  />
-                  <img className="w-44 h-20 rounded" src={readLicense} alt="" />
-                </div>
-              ) : (
-                <div
-                  onClick={() => licenseRef.current.click()}
-                  className="flex flex-col space-y-2 items-center"
-                >
-                  <BsCloudUpload className="text-2xl" />
-                  <p className="text-xs">Upload your licence</p>
-                </div>
-              )}
+          <div className="flex space-x-4 flex-wrap">
+            {/* ==============License field =======================*/}
+            <div>
+              <div className="hover:bg-slate-200 cursor-pointer w-44 h-20 bg-white border rounded flex justify-center items-center">
+                {license ? (
+                  <div className="relative hover:opacity-40">
+                    <RiCloseCircleFill
+                      onClick={() => setLicense(null)}
+                      className="-inset-y-4 absolute inset-x-40 text-red-500 text-2xl hover:scale-110"
+                    />
+                    <img
+                      className="w-44 h-20 rounded"
+                      src={readLicense}
+                      alt=""
+                    />
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => licenseRef.current.click()}
+                    className="flex flex-col space-y-2 items-center"
+                  >
+                    <BsCloudUpload className="text-2xl" />
+                    <p className="text-xs">Upload your licence</p>
+                  </div>
+                )}
+              </div>
+              <input
+                onChange={handelLicence}
+                ref={licenseRef}
+                type="file"
+                hidden
+              />
             </div>
-            <input
-              onChange={handelLicence}
-              ref={licenseRef}
-              type="file"
-              hidden
-            />
+
+            {/* ==================NID field ==========================*/}
+            <div>
+              <div className="hover:bg-slate-200 cursor-pointer w-44 h-20 bg-white border rounded flex justify-center items-center">
+                {nid ? (
+                  <div className="relative hover:opacity-40">
+                    <RiCloseCircleFill
+                      onClick={() => setNid(null)}
+                      className="-inset-y-4 absolute inset-x-40 text-red-500 text-2xl hover:scale-110"
+                    />
+                    <img className="w-44 h-20 rounded" src={readNid} alt="" />
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => nidRef.current.click()}
+                    className="flex flex-col space-y-2 items-center"
+                  >
+                    <BsCloudUpload className="text-2xl" />
+                    <p className="text-xs">Upload your NID</p>
+                  </div>
+                )}
+              </div>
+              <input onChange={handelNid} ref={nidRef} type="file" hidden />
+            </div>
+            {/* ==================Profile field ==========================*/}
+            <div>
+              <div className="hover:bg-slate-200 cursor-pointer w-44 h-20 bg-white border rounded flex justify-center items-center">
+                {profile ? (
+                  <div className="relative hover:opacity-40">
+                    <RiCloseCircleFill
+                      onClick={() => setProfile(null)}
+                      className="-inset-y-4 absolute inset-x-40 text-red-500 text-2xl hover:scale-110"
+                    />
+                    <img
+                      className="w-44 h-20 rounded"
+                      src={readProfile}
+                      alt=""
+                    />
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => profileRef.current.click()}
+                    className="flex flex-col space-y-2 items-center"
+                  >
+                    <BsCloudUpload className="text-2xl" />
+                    <p className="text-xs">Upload your Profile</p>
+                  </div>
+                )}
+              </div>
+              <input
+                onChange={handelProfile}
+                ref={profileRef}
+                type="file"
+                hidden
+              />
+            </div>
           </div>
         </form>
       </div>

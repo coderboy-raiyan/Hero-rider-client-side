@@ -117,12 +117,22 @@ const Register = () => {
         <div className="lg:max-w-6xl lg:mx-auto max-w-3xl mx-4 grid lg:grid-cols-2 grid-cols-1 transition-all my-20">
           {/* description */}
           <div>
-            <h1 className="text-5xl text-gray-700 lg:w-2/3 leading-snug w-full">
-              Get ready to drive with us
-            </h1>
-            <p className="text-sm mt-4">
-              Drive with Hero Rider. Earn on your schedule.
-            </p>
+            <div>
+              <h1 className="text-5xl text-gray-700 lg:w-2/3 leading-snug w-full">
+                Get ready to drive with us
+              </h1>
+              <p className="text-sm mt-4">
+                Drive with Hero Rider. Earn on your schedule.
+              </p>
+            </div>
+
+            {/* thumbnail of the page */}
+            <div className="mt-20 w-[500px] mr-auto">
+              <img
+                src="https://i.postimg.cc/wjRkF1Mk/Cities-Home-Img2x.jpg"
+                alt=""
+              />
+            </div>
           </div>
 
           {/* sign up two ways */}
@@ -131,7 +141,6 @@ const Register = () => {
             <h1 className="text-2xl font-medium mb-4">Sign up Now</h1>
 
             {/* which type sign up */}
-
             <div>
               <ul className="flex items-center space-x-8 flex-wrap">
                 <li>

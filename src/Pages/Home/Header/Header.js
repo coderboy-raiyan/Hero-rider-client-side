@@ -103,22 +103,33 @@ const Header = () => {
               <li className="header-menu">
                 <Link to="">Dashboard</Link>
               </li>
-              <li className="flex items-center space-x-2 cursor-pointer">
-                <div>
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src="https://lh3.googleusercontent.com/ogw/ADea4I5ZvbwSXjWpuc4o-e8C3zhFmZ_zZngI6Up__d7_8Q=s83-c-mo"
-                    alt=""
-                  />
-                </div>
-                <p className="text-white">Raiyan</p>
-                <button
-                  onClick={handelLogout}
-                  className="text-2xl hover:scale-110 text-white transition-all"
-                >
-                  <FiLogOut />
-                </button>
-              </li>
+              {user?.email ? (
+                <li className="flex items-center space-x-2 cursor-pointer">
+                  <div>
+                    <img
+                      className="w-10 h-10 rounded-full"
+                      src="https://lh3.googleusercontent.com/ogw/ADea4I5ZvbwSXjWpuc4o-e8C3zhFmZ_zZngI6Up__d7_8Q=s83-c-mo"
+                      alt=""
+                    />
+                  </div>
+                  <p className="text-white">Raiyan</p>
+                  <button
+                    onClick={handelLogout}
+                    className="text-2xl hover:scale-110 text-white transition-all"
+                  >
+                    <FiLogOut />
+                  </button>
+                </li>
+              ) : (
+                <>
+                  <li className="header-menu">
+                    <Link to="/login">Sign In</Link>
+                  </li>
+                  <li className="header-menu">
+                    <Link to="/register">Sign Up</Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

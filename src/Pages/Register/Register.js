@@ -1,13 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useHistory, useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 import Header from "../Home/Header/Header";
 import LessionForm from "../Shared/LessionForm/LessionForm";
 import RiderForm from "../Shared/RiderForm/RiderForm";
+import useAuth from "./../../Hooks/useAuth";
 
 const Register = () => {
   const [signUpType, setSignUpType] = useState("");
   const { register, handleSubmit, reset } = useForm();
+  const { setError, signUp } = useAuth();
+  const location = useLocation();
+  const history = useHistory();
+
+  useEffect(() => {
+    setError("");
+  }, []);
+
   // all license states
   const [license, setLicense] = useState(null);
   const [finalLicense, setFinalLicense] = useState("");
@@ -118,21 +129,71 @@ const Register = () => {
 
   // final submit function
   const onSubmit = (data) => {
+    // check password
+    if (data.password.length < 6) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password must be at least 6 characters",
+      });
+    }
+    // match two passwords
+    if (data.password !== data.conf_pass) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password did not match",
+      });
+    }
+    // verify age
+    if (data.age.length > 2) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Invalid Age",
+      });
+    }
+
+    // check which type user you are
     if (signUpType === "rider") {
       data.profile = finalProfile;
       data.nid = finalNid;
       data.license = finalLicense;
       const finaldata = {
-        ...data,
+        profile: data.profile,
+        nid: data.nid,
+        license: data.license,
       };
+
+      signUp(
+        data.email,
+        data.password,
+        data.name,
+        data.profile,
+        location,
+        history,
+        finaldata
+      );
 
       console.log(finaldata);
     } else {
       data.profile = finalProfile;
       data.nid = finalNid;
       const finaldata = {
-        ...data,
+        profile: data.profile,
+        nid: data.nid,
+        license: data.license,
       };
+
+      signUp(
+        data.email,
+        data.password,
+        data.name,
+        data.profile,
+        location,
+        history,
+        finaldata
+      );
 
       console.log(finaldata);
     }

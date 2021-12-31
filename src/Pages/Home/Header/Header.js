@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "./../../../Hooks/useAuth";
 
 const Header = () => {
   const [isClicked, setIsClicked] = useState(false);
+  const { user, logout } = useAuth();
+
+  const handelLogout = () => {
+    logout();
+  };
 
   const hamburger = () => {
     setIsClicked(!isClicked);
@@ -53,7 +59,10 @@ const Header = () => {
                 />
               </div>
               <p>Raiyan</p>
-              <button className="text-2xl hover:scale-110 transition-all">
+              <button
+                onClick={handelLogout}
+                className="text-2xl hover:scale-110 transition-all"
+              >
                 <FiLogOut />
               </button>
             </li>
@@ -103,7 +112,10 @@ const Header = () => {
                   />
                 </div>
                 <p className="text-white">Raiyan</p>
-                <button className="text-2xl hover:scale-110 text-white transition-all">
+                <button
+                  onClick={handelLogout}
+                  className="text-2xl hover:scale-110 text-white transition-all"
+                >
                   <FiLogOut />
                 </button>
               </li>

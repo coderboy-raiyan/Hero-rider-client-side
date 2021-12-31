@@ -9,6 +9,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import initializeAuth from "./../Firebase/Firebase.init";
 
 const googleProvider = new GoogleAuthProvider();
@@ -39,7 +40,7 @@ const useFirebase = () => {
 
   //   Sign in
 
-  const signUp = (email, password, name, img, location, history) => {
+  const signUp = (email, password, name, img, location, history, userData) => {
     setLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -54,25 +55,39 @@ const useFirebase = () => {
         });
         setUser(temporaryUser);
         setError("");
+        const redirect_uri = location.state?.from || "/profile";
+        history.push(redirect_uri);
+        Swal.fire("Good job!", "Sign up Successful", "success");
       })
       .catch((error) => {
         const errorMessage = error.message;
         setError(errorMessage);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${errorMessage}`,
+        });
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
-  const signIn = (email, password, location, history) => {
+  const signIn = (email, password, location, history, userData) => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setError("");
+        Swal.fire("Good job!", "Sign up Successful", "success");
       })
       .catch((error) => {
         const errorMessage = error.message;
         setError(errorMessage);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${errorMessage}`,
+        });
       })
       .finally(() => {
         setLoading(false);
@@ -100,6 +115,7 @@ const useFirebase = () => {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           setUser(user);
+          console.log(user);
         } else {
           setUser({});
         }
@@ -112,6 +128,7 @@ const useFirebase = () => {
     user,
     loading,
     error,
+    setError,
     googleSignIn,
     signUp,
     signIn,

@@ -97,6 +97,7 @@ const RiderForm = ({
             <input
               type="password"
               placeholder="Confirm Password"
+              {...register("conf_pass")}
               required
               className="form-input"
             />

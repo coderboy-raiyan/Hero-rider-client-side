@@ -15,17 +15,13 @@ const Login = () => {
       <Header />
 
       <div>
-        <div
-          style={{
-            backgroundImage:
-              "url('https://i.postimg.cc/26r0c4h3/bannerbackground.png')",
-          }}
-          className="bg-no-repeat bg-cover bg-center"
-        >
+        <div className=" bg-no-repeat bg-cover bg-center">
           <div className="lg:max-w-6xl lg:mx-auto max-w-3xl mx-4 ">
             <div className="flex justify-center items-center h-screen flex-col">
               <div className="w-40 mb-5">
-                <img src="https://i.postimg.cc/TY7rMwP3/logo2.png" alt="" />
+                <h1 className="text-2xl text-center text-black font-semibold">
+                  Please Login
+                </h1>
               </div>
               <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -60,7 +56,7 @@ const Login = () => {
 
                 <p className="text-center">
                   Don't have account{" "}
-                  <Link className="text-red-500" to="register">
+                  <Link className="text-gray-400" to="">
                     register
                   </Link>{" "}
                   here

@@ -9,15 +9,13 @@ const Header = () => {
     setIsClicked(!isClicked);
   };
   return (
-    <header className="bg-white border-b shadow-sm">
+    <header className="bg-black border-b shadow-sm">
       <nav className="lg:max-w-6xl lg:mx-auto  max-w-3xl mx-4 py-3 ">
         <div className="flex justify-between items-center">
           {/* left side */}
           <div>
             <Link to="">
-              <h1 className="text-2xl text-red-500 font-semibold">
-                Hero Rider
-              </h1>
+              <h1 className="text-2xl text-white font-semibold">Hero Rider</h1>
             </Link>
           </div>
 
@@ -104,8 +102,8 @@ const Header = () => {
                     alt=""
                   />
                 </div>
-                <p>Raiyan</p>
-                <button className="text-2xl hover:scale-110 transition-all">
+                <p className="text-white">Raiyan</p>
+                <button className="text-2xl hover:scale-110 text-white transition-all">
                   <FiLogOut />
                 </button>
               </li>

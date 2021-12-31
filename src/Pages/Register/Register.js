@@ -35,9 +35,9 @@ const Register = () => {
     setLicense(null);
     setProfile(null);
     setNid(null);
-    setFinalNid(" ");
-    setFinalProfile(" ");
-    setFinalNid(" ");
+    setFinalNid("");
+    setFinalProfile("");
+    setFinalNid("");
     reset();
   }, [signUpType]);
 
@@ -118,7 +118,25 @@ const Register = () => {
 
   // final submit function
   const onSubmit = (data) => {
-    console.log(data, finalNid, "Pro", finalProfile, "Li", finalLicense);
+    if (signUpType === "rider") {
+      data.profile = finalProfile;
+      data.nid = finalNid;
+      data.license = finalLicense;
+      const finaldata = {
+        ...data,
+      };
+
+      console.log(finaldata);
+    } else {
+      data.profile = finalProfile;
+      data.nid = finalNid;
+      const finaldata = {
+        ...data,
+      };
+
+      console.log(finaldata);
+    }
+
     reset();
     setLicense(null);
     setProfile(null);

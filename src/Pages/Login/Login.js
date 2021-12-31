@@ -15,7 +15,7 @@ const Login = () => {
       <Header />
 
       <div>
-        <div className=" bg-no-repeat bg-cover bg-center">
+        <div className="bg-gray-100 bg-no-repeat bg-cover bg-center">
           <div className="lg:max-w-6xl lg:mx-auto max-w-3xl mx-4 ">
             <div className="flex justify-center items-center h-screen flex-col">
               <div className="w-40 mb-5">
@@ -56,7 +56,7 @@ const Login = () => {
 
                 <p className="text-center">
                   Don't have account{" "}
-                  <Link className="text-gray-400" to="">
+                  <Link className="text-gray-400" to="/register">
                     register
                   </Link>{" "}
                   here

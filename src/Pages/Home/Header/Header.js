@@ -15,7 +15,7 @@ const Header = () => {
           {/* left side */}
           <div>
             <Link to="">
-              <h1 className="text-2xl text-white font-semibold">Hero Rider</h1>
+              <h1 className="text-2xl text-white">Hero Rider</h1>
             </Link>
           </div>
 

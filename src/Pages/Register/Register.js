@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import Header from "../Home/Header/Header";
+import LessionForm from "../Shared/LessionForm/LessionForm";
 import RiderForm from "../Shared/RiderForm/RiderForm";
 
 const Register = () => {
@@ -24,6 +25,21 @@ const Register = () => {
   const [finalProfile, setFinalProfile] = useState("");
   const [readProfile, setreadProfile] = useState(null);
   const profileRef = useRef();
+
+  // default sign up type set
+  useEffect(() => {
+    setSignUpType("rider");
+  }, []);
+
+  useEffect(() => {
+    setLicense(null);
+    setProfile(null);
+    setNid(null);
+    setFinalNid(" ");
+    setFinalProfile(" ");
+    setFinalNid(" ");
+    reset();
+  }, [signUpType]);
 
   // upload license
   useEffect(() => {
@@ -103,6 +119,13 @@ const Register = () => {
   // final submit function
   const onSubmit = (data) => {
     console.log(data, finalNid, "Pro", finalProfile, "Li", finalLicense);
+    reset();
+    setLicense(null);
+    setProfile(null);
+    setNid(null);
+    setFinalNid(" ");
+    setFinalProfile(" ");
+    setFinalNid(" ");
   };
 
   const handelOption = (e) => {
@@ -150,6 +173,8 @@ const Register = () => {
                     id="rider"
                     name="rider"
                     value="rider"
+                    checked={signUpType === "rider"}
+                    readOnly
                   />
                   <label className="cursor-pointer ml-2" htmlFor="rider">
                     Join as a rider
@@ -171,26 +196,49 @@ const Register = () => {
             </div>
 
             {/* Sign up fields */}
-            <RiderForm
-              onSubmit={onSubmit}
-              handelLicence={handelLicence}
-              handelNid={handelNid}
-              register={register}
-              handleSubmit={handleSubmit}
-              readLicense={readLicense}
-              licenseRef={licenseRef}
-              readNid={readNid}
-              nidRef={nidRef}
-              nid={nid}
-              setNid={setNid}
-              setLicense={setLicense}
-              license={license}
-              setProfile={setProfile}
-              readProfile={readProfile}
-              profile={profile}
-              profileRef={profileRef}
-              handelProfile={handelProfile}
-            />
+            {signUpType === "rider" ? (
+              <RiderForm
+                onSubmit={onSubmit}
+                handelLicence={handelLicence}
+                handelNid={handelNid}
+                register={register}
+                handleSubmit={handleSubmit}
+                readLicense={readLicense}
+                licenseRef={licenseRef}
+                readNid={readNid}
+                nidRef={nidRef}
+                nid={nid}
+                setNid={setNid}
+                setLicense={setLicense}
+                license={license}
+                setProfile={setProfile}
+                readProfile={readProfile}
+                profile={profile}
+                profileRef={profileRef}
+                handelProfile={handelProfile}
+              />
+            ) : (
+              <LessionForm
+                onSubmit={onSubmit}
+                handelLicence={handelLicence}
+                handelNid={handelNid}
+                register={register}
+                handleSubmit={handleSubmit}
+                readLicense={readLicense}
+                licenseRef={licenseRef}
+                readNid={readNid}
+                nidRef={nidRef}
+                nid={nid}
+                setNid={setNid}
+                setLicense={setLicense}
+                license={license}
+                setProfile={setProfile}
+                readProfile={readProfile}
+                profile={profile}
+                profileRef={profileRef}
+                handelProfile={handelProfile}
+              />
+            )}
           </div>
         </div>
       </div>

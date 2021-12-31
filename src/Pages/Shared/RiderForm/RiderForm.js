@@ -30,7 +30,7 @@ const RiderForm = ({
           className="flex flex-col space-y-6"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div>
+          <div className="flex space-x-4">
             <input
               type="text"
               placeholder="Full Name"
@@ -38,8 +38,6 @@ const RiderForm = ({
               required
               className="form-input"
             />
-          </div>
-          <div>
             <input
               type="email"
               placeholder="Email"
@@ -68,6 +66,37 @@ const RiderForm = ({
               title="Give a country code previous your number"
               placeholder="Number"
               {...register("number")}
+              required
+              className="form-input"
+            />
+          </div>
+          <div className="flex space-x-4">
+            <input
+              type="text"
+              placeholder="Car model"
+              {...register("car_model")}
+              required
+              className="form-input"
+            />
+            <input
+              type="text"
+              placeholder="Bike/Car"
+              {...register("vehicle_type")}
+              required
+              className="form-input"
+            />
+          </div>
+          <div className="flex space-x-4">
+            <input
+              type="password"
+              placeholder="Password"
+              {...register("password")}
+              required
+              className="form-input"
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
               required
               className="form-input"
             />
@@ -161,6 +190,15 @@ const RiderForm = ({
                 hidden
               />
             </div>
+          </div>
+
+          <div>
+            <button
+              disabled={!profile || !nid || !license}
+              className="disabled:opacity-75 disabled:bg-black disabled:hover:bg-black disabled:hover:text-white primary-btn rounded py-3 px-8 block w-full font-semibold"
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>

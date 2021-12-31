@@ -25,8 +25,6 @@ const Register = () => {
   const [readProfile, setreadProfile] = useState(null);
   const profileRef = useRef();
 
-  console.log("nid", finalNid, "Pro", finalProfile, "Li", finalLicense);
-
   // upload license
   useEffect(() => {
     if (license) {
@@ -104,7 +102,7 @@ const Register = () => {
 
   // final submit function
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data, finalNid, "Pro", finalProfile, "Li", finalLicense);
   };
 
   const handelOption = (e) => {

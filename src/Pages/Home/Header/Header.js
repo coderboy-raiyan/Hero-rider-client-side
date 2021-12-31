@@ -10,7 +10,7 @@ const Header = () => {
   };
   return (
     <header className="bg-white border-b shadow-sm">
-      <nav className="lg:max-w-6xl lg:mx-auto max-w-3xl mx-4 py-3 ">
+      <nav className="lg:max-w-6xl lg:mx-auto  max-w-3xl mx-4 py-3 ">
         <div className="flex justify-between items-center">
           {/* left side */}
           <div>

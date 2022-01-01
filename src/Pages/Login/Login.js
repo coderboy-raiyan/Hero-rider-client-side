@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useHistory, useLocation } from "react-router-dom";
@@ -8,13 +8,30 @@ import Header from "./../Home/Header/Header";
 
 const Login = () => {
   const { register, handleSubmit, reset } = useForm();
-  const { signIn, setError } = useAuth();
+  const { signIn, user, setUser, setError } = useAuth();
+  const [checked, setChecked] = useState(false);
   const location = useLocation();
   const history = useHistory();
 
   useEffect(() => {
     setError("");
   }, []);
+
+  useEffect(() => {
+    if (checked) {
+      setUser({});
+    }
+  }, [user, checked]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/find/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.isBlocked) {
+          setChecked(data?.isBlocked);
+        }
+      });
+  }, [user]);
 
   const onSubmit = (data) => {
     // check password
@@ -25,6 +42,7 @@ const Login = () => {
         text: "Password must be at least 6 characters",
       });
     }
+
     signIn(data.email, data.password, location, history);
   };
   return (

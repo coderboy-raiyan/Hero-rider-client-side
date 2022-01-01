@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import useAuth from "./../../../Hooks/useAuth";
+import useBlockContext from "./../../../Hooks/useBlockContxet";
 import Header from "./../Header/Header";
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
   const [userData, setUserData] = useState({});
+  const { checked } = useBlockContext();
+
+  useEffect(() => {
+    if (checked) {
+      setUser({});
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You are blocked by the admin",
+      });
+    }
+  }, [checked]);
 
   useEffect(() => {
     fetch(`http://localhost:5000/users/${user.email}`)

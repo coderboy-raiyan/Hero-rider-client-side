@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AuthProvider from "./Context/AuthProvider";
+import BlockProvider from "./Context/BlockProvider";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Profile from "./Pages/Home/Profile/Profile";
 import Login from "./Pages/Login/Login";
@@ -13,31 +14,33 @@ import "./tailwind.css";
 const App = () => {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Switch>
-          <LoginPrivate exact path="/">
-            <Profile />
-          </LoginPrivate>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <LoginPrivate path="/profile">
-            <Profile />
-          </LoginPrivate>
-          <LoginPrivate path="/dashboard">
-            <Dashboard />
-          </LoginPrivate>
-          <LoginPrivate path="/payment/:orderId">
-            <Payment />
-          </LoginPrivate>
-          <Route exact path="*">
-            <NotFound />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <BlockProvider>
+        <BrowserRouter>
+          <Switch>
+            <LoginPrivate exact path="/">
+              <Profile />
+            </LoginPrivate>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <LoginPrivate path="/profile">
+              <Profile />
+            </LoginPrivate>
+            <LoginPrivate path="/dashboard">
+              <Dashboard />
+            </LoginPrivate>
+            <LoginPrivate path="/payment/:orderId">
+              <Payment />
+            </LoginPrivate>
+            <Route exact path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </BlockProvider>
     </AuthProvider>
   );
 };

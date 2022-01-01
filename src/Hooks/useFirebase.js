@@ -164,6 +164,7 @@ const useFirebase = () => {
 
   return {
     user,
+    setUser,
     loading,
     error,
     admin,

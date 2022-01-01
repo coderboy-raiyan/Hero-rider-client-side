@@ -75,10 +75,10 @@ const useFirebase = () => {
   };
 
   // sign in
-  const signIn = (email, password, location, history) => {
+  const signIn = (email, password, location, history, userData) => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then((result) => {
         setError("");
         Swal.fire("Good job!", "Sign up Successful", "success");
         const redirect_uri = location.state?.from || "/profile";
@@ -140,8 +140,9 @@ const useFirebase = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(mainData),
-      }).then(() => {});
-    } else {
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
     }
   };
 

@@ -125,10 +125,10 @@ const Header = () => {
               {user?.email ? (
                 <>
                   <li className="header-menu">
-                    <Link to="">Dashboard</Link>
+                    <Link to="/dashboard">Dashboard</Link>
                   </li>
                   <li className="header-menu text-sm border p-2 rounded-full">
-                    As a <Link to="">{userData?.user_type}</Link>
+                    As a {userData?.user_type}
                   </li>
                   <li className="flex items-center space-x-2 cursor-pointer">
                     <div>

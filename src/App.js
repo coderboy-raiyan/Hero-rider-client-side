@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AuthProvider from "./Context/AuthProvider";
+import Dashboard from "./Pages/Dashboard/Dashboard";
 import Profile from "./Pages/Home/Profile/Profile";
 import Login from "./Pages/Login/Login";
 import NotFound from "./Pages/NotFound/NotFound";
@@ -24,6 +25,9 @@ const App = () => {
           </Route>
           <LoginPrivate path="/profile">
             <Profile />
+          </LoginPrivate>
+          <LoginPrivate path="/dashboard">
+            <Dashboard />
           </LoginPrivate>
           <Route exact path="*">
             <NotFound />

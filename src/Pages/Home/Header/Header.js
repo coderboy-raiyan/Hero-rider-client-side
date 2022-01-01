@@ -6,9 +6,9 @@ import useAuth from "./../../../Hooks/useAuth";
 
 const Header = () => {
   const [isClicked, setIsClicked] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, logout, admin } = useAuth();
   const [userData, setUserData] = useState({});
-
+  console.log(admin);
   useEffect(() => {
     fetch(`http://localhost:5000/users/${user.email}`)
       .then((res) => res.json())
@@ -122,11 +122,13 @@ const Header = () => {
           {/* right side */}
           <div className="hidden lg:inline-flex">
             <ul className="flex items-center space-x-8">
+              {admin.admin && (
+                <li className="header-menu">
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
+              )}
               {user?.email ? (
                 <>
-                  <li className="header-menu">
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
                   <li className="header-menu text-sm border p-2 rounded-full">
                     As a {userData?.user_type}
                   </li>

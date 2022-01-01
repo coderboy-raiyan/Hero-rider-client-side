@@ -5,6 +5,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Profile from "./Pages/Home/Profile/Profile";
 import Login from "./Pages/Login/Login";
 import NotFound from "./Pages/NotFound/NotFound";
+import Payment from "./Pages/Payment/Payment";
 import LoginPrivate from "./Pages/PrivateRoute/LoginPrivate";
 import Register from "./Pages/Register/Register";
 import "./tailwind.css";
@@ -28,6 +29,9 @@ const App = () => {
           </LoginPrivate>
           <LoginPrivate path="/dashboard">
             <Dashboard />
+          </LoginPrivate>
+          <LoginPrivate path="/payment">
+            <Payment />
           </LoginPrivate>
           <Route exact path="*">
             <NotFound />

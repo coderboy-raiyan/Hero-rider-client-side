@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import useAuth from "./../../../Hooks/useAuth";
 import Header from "./../Header/Header";
 
@@ -63,54 +64,67 @@ const Profile = () => {
 
         {userData?.user_type === "learner" && (
           <div className="flex lg:space-x-8 mt-8 lg:flex-row flex-col space-y-4 lg:space-y-0 justify-center">
-            <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
-              <h2 className="text-sm tracking-widest title-font mb-1 font-medium">
-                START
-              </h2>
-              <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">
-                CAR $200
-              </h1>
-              <p className="flex items-center text-gray-600 mb-2">
-                All modern support
-              </p>
-              <p className="flex items-center text-gray-600 mb-2">
-                Great Teacher
-              </p>
-              <p className="flex items-center text-gray-600 mb-6">
-                With 24/7 support
-              </p>
-              <button className="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">
-                Buy Now
-              </button>
-              <p className="text-xs text-gray-500 mt-3">
-                Literally you probably haven't heard this type of offer
-              </p>
-            </div>
-
-            {/* Bike */}
-            <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
-              <h2 className="text-sm tracking-widest title-font mb-1 font-medium">
-                START
-              </h2>
-              <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">
-                Bike $100
-              </h1>
-              <p className="flex items-center text-gray-600 mb-2">
-                All modern support
-              </p>
-              <p className="flex items-center text-gray-600 mb-2">
-                Great Teacher
-              </p>
-              <p className="flex items-center text-gray-600 mb-6">
-                With 24/7 support
-              </p>
-              <button className="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">
-                Buy Now
-              </button>
-              <p className="text-xs text-gray-500 mt-3">
-                Literally you probably haven't heard this type of offer
-              </p>
-            </div>
+            {userData?.vehicle_type.toLowerCase().trim() === "car" ? (
+              <div className="h-full lg:w-2/3 md:w-2/3 w-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+                <h2 className="text-sm tracking-widest title-font mb-1 font-medium">
+                  START
+                </h2>
+                <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">
+                  CAR $200
+                </h1>
+                <p className="flex items-center text-gray-600 mb-2">
+                  All modern support
+                </p>
+                <p className="flex items-center text-gray-600 mb-2">
+                  Great Teacher
+                </p>
+                <p className="flex items-center text-gray-600 mb-6">
+                  With 24/7 support
+                </p>
+                {userData?.payment === "pending" ? (
+                  <Link to="/payment">
+                    <button className="btn btn-secondary block w-full">
+                      Pay
+                    </button>
+                  </Link>
+                ) : (
+                  <button disabled className="btn btn-secondary">
+                    Paid
+                  </button>
+                )}
+                <p className="text-xs text-gray-500 mt-3">
+                  Literally you probably haven't heard this type of offer
+                </p>
+              </div>
+            ) : (
+              <div className="h-full  lg:w-2/3 md:w-2/3 w-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
+                <h2 className="text-sm tracking-widest title-font mb-1 font-medium">
+                  START
+                </h2>
+                <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">
+                  Bike $100
+                </h1>
+                <p className="flex items-center text-gray-600 mb-2">
+                  All modern support
+                </p>
+                <p className="flex items-center text-gray-600 mb-2">
+                  Great Teacher
+                </p>
+                <p className="flex items-center text-gray-600 mb-6">
+                  With 24/7 support
+                </p>
+                <button className="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">
+                  {userData?.payment === "pending" ? (
+                    <Link to="/payment">Pay</Link>
+                  ) : (
+                    "Paid"
+                  )}
+                </button>
+                <p className="text-xs text-gray-500 mt-3">
+                  Literally you probably haven't heard this type of offer
+                </p>
+              </div>
+            )}
           </div>
         )}
       </div>

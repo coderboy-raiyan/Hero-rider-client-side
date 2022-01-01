@@ -153,6 +153,16 @@ const Register = () => {
         text: "Invalid Age",
       });
     }
+    if (
+      data.vehicle_type.toLowerCase().trim() !== "car" &&
+      data.vehicle_type.toLowerCase().trim() !== "bike"
+    ) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Only Car and Bike is applicable",
+      });
+    }
 
     // check which type user you are
     if (signUpType === "rider") {

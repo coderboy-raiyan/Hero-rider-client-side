@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import React, { useEffect, useState } from "react";
 import { Badge, Spinner, Table } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 const override = css`
   display: block;
@@ -67,6 +68,33 @@ const Users = () => {
     } else {
       setUsers(filtered);
     }
+  };
+
+  // handel Block user
+  const handelBlock = (id) => {
+    Swal.fire({
+      title: "Do you want to block this user?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/user/block/${id}`, {
+          method: "PUT",
+          headers: { "content-type": "application/json" },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.acknowledged) {
+              Swal.fire("Saved!", "", "success");
+            }
+          });
+      } else if (result.isDenied) {
+        Swal.fire("Ok no problem", "", "info");
+      }
+    });
   };
 
   return (
@@ -136,7 +164,12 @@ const Users = () => {
                     )}
                   </td>
                   <td>
-                    <input type="checkbox" name="" id="" />
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handelBlock(user._id)}
+                    >
+                      Block
+                    </button>
                   </td>
                 </tr>
               );

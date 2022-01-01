@@ -12,6 +12,8 @@ const Profile = () => {
       .then((data) => setUserData(data));
   }, [user]);
 
+  console.log(userData);
+
   return (
     <>
       <Header />

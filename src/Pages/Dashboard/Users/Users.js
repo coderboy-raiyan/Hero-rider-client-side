@@ -14,6 +14,8 @@ const Users = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [reload, setReload] = useState(false);
+  console.log(users);
   const size = 10;
 
   console.log(users);
@@ -32,7 +34,7 @@ const Users = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [page]);
+  }, [page, reload]);
 
   // handelEmail
   const handelEmail = (e) => {
@@ -78,23 +80,28 @@ const Users = () => {
       showCancelButton: true,
       confirmButtonText: "Yes",
       denyButtonText: `No`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        fetch(`http://localhost:5000/user/block/${id}`, {
-          method: "PUT",
-          headers: { "content-type": "application/json" },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.acknowledged) {
-              Swal.fire("Saved!", "", "success");
-            }
-          });
-      } else if (result.isDenied) {
-        Swal.fire("Ok no problem", "", "info");
-      }
-    });
+    })
+      .then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          fetch(`http://localhost:5000/user/block/${id}`, {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged) {
+                Swal.fire("Saved!", "", "success");
+                setReload(true);
+              }
+            });
+        } else if (result.isDenied) {
+          Swal.fire("Ok no problem", "", "info");
+        }
+      })
+      .finally(() => {
+        setReload(false);
+      });
   };
 
   return (
@@ -164,12 +171,18 @@ const Users = () => {
                     )}
                   </td>
                   <td>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => handelBlock(user._id)}
-                    >
-                      Block
-                    </button>
+                    {user.isBlocked ? (
+                      <button disabled className="btn btn-secondary">
+                        Blocked
+                      </button>
+                    ) : (
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => handelBlock(user._id)}
+                      >
+                        Block
+                      </button>
+                    )}
                   </td>
                 </tr>
               );

@@ -63,7 +63,7 @@ const Header = () => {
                   color: "red",
                 }}
                 className="font-medium text-3xl md:text-7xl"
-                to="/home"
+                to="/dashboard"
                 onClick={() => {
                   setIsClicked(!isClicked);
                   window.scrollTo(0, 0);
@@ -80,7 +80,7 @@ const Header = () => {
                   alt=""
                 />
               </div>
-              <p>Raiyan</p>
+              <p className="text-black">{user.displayName}</p>
               <button
                 onClick={handelLogout}
                 className="text-2xl hover:scale-110 transition-all"

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AuthProvider from "./Context/AuthProvider";
 import BlockProvider from "./Context/BlockProvider";
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import Footer from "./Pages/Footer/Footer";
 import Profile from "./Pages/Home/Profile/Profile";
 import Login from "./Pages/Login/Login";
 import NotFound from "./Pages/NotFound/NotFound";
@@ -39,6 +40,7 @@ const App = () => {
               <NotFound />
             </Route>
           </Switch>
+          <Footer />
         </BrowserRouter>
       </BlockProvider>
     </AuthProvider>

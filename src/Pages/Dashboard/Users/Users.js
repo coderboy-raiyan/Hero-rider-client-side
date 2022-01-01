@@ -9,6 +9,7 @@ const override = css`
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [filtered, setFiltered] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -20,6 +21,7 @@ const Users = () => {
       .then((res) => res.json())
       .then((data) => {
         setUsers(data.users);
+        setFiltered(data.users);
         const count = data.count;
         const pageNumber = Math.ceil(count / size);
         setPageCount(pageNumber);
@@ -29,32 +31,73 @@ const Users = () => {
       });
   }, [page]);
 
-  console.log(pageCount);
+  // handelEmail
+  const handelEmail = (e) => {
+    const email = e.target.value;
+    if (email) {
+      const filter = users.filter((user) =>
+        user.email.toLowerCase().includes(email.toLowerCase())
+      );
+      setUsers(filter);
+    } else {
+      setUsers(filtered);
+    }
+  };
+  const handelNumber = (e) => {
+    const number = e.target.value;
+    if (number) {
+      const filter = users.filter((user) =>
+        user.number.toLowerCase().includes(number.toLowerCase())
+      );
+      setUsers(filter);
+    } else {
+      setUsers(filtered);
+    }
+  };
+
+  const handelName = (e) => {
+    const name = e.target.value;
+    if (name) {
+      const filter = users.filter((user) =>
+        user.displayName.toLowerCase().includes(name.toLowerCase())
+      );
+      setUsers(filter);
+    } else {
+      setUsers(filtered);
+    }
+  };
 
   return (
     <div className="">
-      <div className="bg-white py-5 shadow my-4 px-4 flex space-x-3 rounded">
-        <input
-          type="text"
-          className="form-input w-2/3 py-3"
-          placeholder="search by email"
-        />
-        <input
-          type="text"
-          className="form-input w-2/3 py-3"
-          placeholder="search by phone number"
-        />
-        <input
-          type="text"
-          className="form-input w-2/3 py-3"
-          placeholder="search by name"
-        />
+      <div className="bg-white py-5 shadow my-4 px-4 rounded">
+        <h1 className="text-2xl mb-3">Search</h1>
+        <div className=" flex space-x-3">
+          <input
+            type="text"
+            className="form-input w-2/3 py-3"
+            placeholder="search by email"
+            onChange={handelEmail}
+          />
+          <input
+            type="text"
+            className="form-input w-2/3 py-3"
+            placeholder="search by phone number"
+            onChange={handelNumber}
+          />
+          <input
+            type="text"
+            className="form-input w-2/3 py-3"
+            placeholder="search by name"
+            onChange={handelName}
+          />
+        </div>
       </div>
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>User Name</th>
             <th>Email</th>
+            <th>Number</th>
             <th>Age</th>
             <th>Vehicle Type</th>
             <th>Car/Bike Model</th>
@@ -76,6 +119,7 @@ const Users = () => {
                 <tr key={user._id}>
                   <td>{user.displayName}</td>
                   <td>{user.email}</td>
+                  <td>{user.number}</td>
                   <td>{user.age}</td>
                   <td>{user.vehicle_type}</td>
                   <td>{user.car_model}</td>

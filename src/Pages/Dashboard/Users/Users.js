@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import React, { useEffect, useState } from "react";
-import { Spinner, Table } from "react-bootstrap";
+import { Badge, Spinner, Table } from "react-bootstrap";
 
 const override = css`
   display: block;
@@ -14,6 +14,8 @@ const Users = () => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
   const size = 10;
+
+  console.log(users);
 
   useEffect(() => {
     setLoading(true);
@@ -124,7 +126,15 @@ const Users = () => {
                   <td>{user.vehicle_type}</td>
                   <td>{user.car_model}</td>
                   <td>{user.user_type}</td>
-                  <td className="text-xs">{user.payment}</td>
+                  <td className="text-xs">
+                    {user.payment === "pending" ? (
+                      <Badge bg="info">Pending</Badge>
+                    ) : (
+                      <Badge bg="success">
+                        {user?.payment?.payment_status}
+                      </Badge>
+                    )}
+                  </td>
                   <td>
                     <input type="checkbox" name="" id="" />
                   </td>

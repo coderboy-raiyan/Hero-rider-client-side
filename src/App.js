@@ -30,7 +30,7 @@ const App = () => {
           <LoginPrivate path="/dashboard">
             <Dashboard />
           </LoginPrivate>
-          <LoginPrivate path="/payment">
+          <LoginPrivate path="/payment/:orderId">
             <Payment />
           </LoginPrivate>
           <Route exact path="*">

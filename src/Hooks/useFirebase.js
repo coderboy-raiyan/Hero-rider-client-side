@@ -138,7 +138,7 @@ const useFirebase = () => {
       ...userData,
     };
     if (type === "POST") {
-      fetch("http://localhost:5000/users", {
+      fetch("https://afternoon-coast-04252.herokuapp.com/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(mainData),
@@ -151,7 +151,7 @@ const useFirebase = () => {
   // check if user is admin user
   useEffect(() => {
     setIsAdminLoading(true);
-    fetch(`http://localhost:5000/isadmin/${user.email}`)
+    fetch(`https://afternoon-coast-04252.herokuapp.com/isadmin/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

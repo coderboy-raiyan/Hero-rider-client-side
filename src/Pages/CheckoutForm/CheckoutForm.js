@@ -12,7 +12,7 @@ const CheckoutForm = ({ price, order }) => {
   console.log(price, order);
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://afternoon-coast-04252.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ price }),
@@ -89,7 +89,7 @@ const CheckoutForm = ({ price, order }) => {
         created: paymentIntent.created,
       };
 
-      fetch(`http://localhost:5000/order/${order._id}`, {
+      fetch(`https://afternoon-coast-04252.herokuapp.com/order/${order._id}`, {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(payment),

@@ -22,7 +22,7 @@ const Profile = () => {
   }, [checked]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.email}`)
+    fetch(`https://afternoon-coast-04252.herokuapp.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => setUserData(data));
   }, [user]);

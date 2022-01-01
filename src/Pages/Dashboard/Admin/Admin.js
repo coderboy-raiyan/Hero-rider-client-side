@@ -7,7 +7,7 @@ const Admin = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    fetch(`http://localhost:5000/admin/${data.email}`, {
+    fetch(`https://afternoon-coast-04252.herokuapp.com/admin/${data.email}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
     })

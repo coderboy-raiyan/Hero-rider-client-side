@@ -22,7 +22,9 @@ const Users = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/users?page=${page}&&size=${size}`)
+    fetch(
+      `https://afternoon-coast-04252.herokuapp.com/users?page=${page}&&size=${size}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setUsers(data.users);
@@ -84,10 +86,13 @@ const Users = () => {
       .then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          fetch(`http://localhost:5000/user/block/${id}`, {
-            method: "PUT",
-            headers: { "content-type": "application/json" },
-          })
+          fetch(
+            `https://afternoon-coast-04252.herokuapp.com/user/block/${id}`,
+            {
+              method: "PUT",
+              headers: { "content-type": "application/json" },
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               if (data.acknowledged) {

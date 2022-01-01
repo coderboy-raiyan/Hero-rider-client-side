@@ -6,7 +6,7 @@ const useBlock = () => {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/find/${user.email}`)
+    fetch(`https://afternoon-coast-04252.herokuapp.com/find/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setChecked(data?.isBlocked);

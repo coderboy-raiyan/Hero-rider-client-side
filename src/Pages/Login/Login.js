@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "./../../Hooks/useAuth";
@@ -24,7 +23,7 @@ const Login = () => {
   }, [user, checked]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/find/${user.email}`)
+    fetch(`https://afternoon-coast-04252.herokuapp.com/find/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         if (data?.isBlocked) {
@@ -80,13 +79,6 @@ const Login = () => {
                   <button className="primary-btn rounded py-3 block text-lg hover:border-2 border-2">
                     Login
                   </button>
-                </div>
-
-                <p className="text-center">Or Login with...</p>
-                {/* Google login */}
-                <div className="flex border p-4 rounded-full justify-center space-x-4 items-center my-4 cursor-pointer hover:scale-105 transform transition-all">
-                  <FcGoogle className="text-3xl" />
-                  <p className="text-lg">Connect with Google</p>
                 </div>
 
                 <p className="text-center">

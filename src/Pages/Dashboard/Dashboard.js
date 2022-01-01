@@ -10,8 +10,9 @@ import {
   Row,
 } from "react-bootstrap";
 import { RiMenu3Line, RiShoppingCartLine } from "react-icons/ri";
-import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
+import { Link, Switch, useRouteMatch } from "react-router-dom";
 import Admin from "./Admin/Admin";
+import PrivateDashBoard from "./PrivateDashboard/PrivateDashBoard";
 import Users from "./Users/Users";
 
 const Dashboard = () => {
@@ -77,15 +78,15 @@ const Dashboard = () => {
           <Row>
             <Col xs={12} md={12} lg={12}>
               <Switch>
-                <Route exact path={path}>
+                <PrivateDashBoard exact path={path}>
                   <Users />
-                </Route>
-                <Route path={`${path}/users`}>
+                </PrivateDashBoard>
+                <PrivateDashBoard path={`${path}/users`}>
                   <Users />
-                </Route>
-                <Route path={`${path}/admin`}>
+                </PrivateDashBoard>
+                <PrivateDashBoard path={`${path}/admin`}>
                   <Admin />
-                </Route>
+                </PrivateDashBoard>
               </Switch>
             </Col>
           </Row>

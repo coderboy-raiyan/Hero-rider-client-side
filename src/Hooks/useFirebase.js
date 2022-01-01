@@ -21,6 +21,8 @@ const useFirebase = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const auth = getAuth();
+  const [isAdminLoading, setIsAdminLoading] = useState(true);
+  const [admin, setAdmin] = useState(false);
 
   //   google sign in
   const googleSignIn = (location, history) => {
@@ -146,10 +148,26 @@ const useFirebase = () => {
     }
   };
 
+  // check if user is admin user
+  useEffect(() => {
+    setIsAdminLoading(true);
+    fetch(`http://localhost:5000/isadmin/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setAdmin(data);
+      })
+      .finally(() => {
+        setIsAdminLoading(false);
+      });
+  }, [user.email]);
+
   return {
     user,
     loading,
     error,
+    admin,
+    isAdminLoading,
     setError,
     googleSignIn,
     signUp,

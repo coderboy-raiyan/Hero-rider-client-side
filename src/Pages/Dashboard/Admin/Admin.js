@@ -1,11 +1,45 @@
 import React from "react";
 import { Col, Container, FormControl, InputGroup, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Admin = () => {
   const { register, handleSubmit, reset } = useForm();
+
   const onSubmit = (data) => {
-    console.log(data);
+    fetch(`http://localhost:5000/admin/${data.email}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Wow Now this user is admin",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else if (data.matchedCount) {
+          Swal.fire({
+            icon: "info",
+            title: "Oops...",
+            text: "This email user is already an admin",
+            footer: '<a href="">Why do I have this issue?</a>',
+          });
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Opps! Email doesn't exists",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+
+    reset();
   };
   return (
     <section className="make-admin">

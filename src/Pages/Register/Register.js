@@ -160,9 +160,14 @@ const Register = () => {
       data.nid = finalNid;
       data.license = finalLicense;
       const finaldata = {
-        profile: data.profile,
-        nid: data.nid,
-        license: data.license,
+        profile: finalProfile,
+        nid: finalNid,
+        license: finalLicense,
+        age: data.age,
+        number: data.number,
+        car_model: data.car_model,
+        vehicle_type: data.vehicle_type,
+        user_type: "rider",
       };
 
       signUp(
@@ -180,9 +185,12 @@ const Register = () => {
       data.profile = finalProfile;
       data.nid = finalNid;
       const finaldata = {
-        profile: data.profile,
-        nid: data.nid,
-        license: data.license,
+        profile: finalProfile,
+        nid: finalNid,
+        age: data.age,
+        number: data.number,
+        vehicle_type: data.vehicle_type,
+        user_type: "learner",
       };
 
       signUp(

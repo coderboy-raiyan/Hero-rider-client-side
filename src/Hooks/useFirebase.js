@@ -53,6 +53,7 @@ const useFirebase = () => {
           displayName: name,
           photoURL: img,
         });
+        sendData(temporaryUser, userData, "POST");
         setUser(temporaryUser);
         setError("");
         const redirect_uri = location.state?.from || "/profile";
@@ -126,6 +127,23 @@ const useFirebase = () => {
       }),
     [auth]
   );
+
+  // send the user information to the database
+
+  const sendData = (user, userData, type) => {
+    const mainData = {
+      ...user,
+      ...userData,
+    };
+    if (type === "POST") {
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(mainData),
+      }).then(() => {});
+    } else {
+    }
+  };
 
   return {
     user,

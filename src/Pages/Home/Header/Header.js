@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
 import useAuth from "./../../../Hooks/useAuth";
 
 const Header = () => {
@@ -8,7 +9,21 @@ const Header = () => {
   const { user, logout } = useAuth();
 
   const handelLogout = () => {
-    logout();
+    Swal.fire({
+      title: "Do you want to Logout?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        logout();
+        Swal.fire("Saved!", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("Ok", "", "info");
+      }
+    });
   };
 
   const hamburger = () => {
@@ -54,7 +69,7 @@ const Header = () => {
               <div>
                 <img
                   className="w-10 h-10 rounded-full"
-                  src="https://lh3.googleusercontent.com/ogw/ADea4I5ZvbwSXjWpuc4o-e8C3zhFmZ_zZngI6Up__d7_8Q=s83-c-mo"
+                  src={user.photoURL}
                   alt=""
                 />
               </div>
@@ -108,11 +123,11 @@ const Header = () => {
                   <div>
                     <img
                       className="w-10 h-10 rounded-full"
-                      src="https://lh3.googleusercontent.com/ogw/ADea4I5ZvbwSXjWpuc4o-e8C3zhFmZ_zZngI6Up__d7_8Q=s83-c-mo"
+                      src={user.photoURL}
                       alt=""
                     />
                   </div>
-                  <p className="text-white">Raiyan</p>
+                  <p className="text-white">{user.displayName}</p>
                   <button
                     onClick={handelLogout}
                     className="text-2xl hover:scale-110 text-white transition-all"

@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAuth from "./../../Hooks/useAuth";
 import Header from "./../Home/Header/Header";
 
 const Login = () => {
   const { register, handleSubmit, reset } = useForm();
+  const { signIn, setError } = useAuth();
+  const location = useLocation();
+  const history = useHistory();
+
+  useEffect(() => {
+    setError("");
+  }, []);
 
   const onSubmit = (data) => {
-    console.log(data);
+    // check password
+    if (data.password.length < 6) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password must be at least 6 characters",
+      });
+    }
+    signIn(data.email, data.password, location, history);
   };
   return (
     <>

@@ -38,7 +38,7 @@ const useFirebase = () => {
       });
   };
 
-  //   Sign in
+  //   Sign up
 
   const signUp = (email, password, name, img, location, history, userData) => {
     setLoading(true);
@@ -73,12 +73,15 @@ const useFirebase = () => {
       });
   };
 
-  const signIn = (email, password, location, history, userData) => {
+  // sign in
+  const signIn = (email, password, location, history) => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setError("");
         Swal.fire("Good job!", "Sign up Successful", "success");
+        const redirect_uri = location.state?.from || "/profile";
+        history.push(redirect_uri);
       })
       .catch((error) => {
         const errorMessage = error.message;

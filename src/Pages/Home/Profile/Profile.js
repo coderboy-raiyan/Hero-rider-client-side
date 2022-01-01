@@ -17,7 +17,7 @@ const Profile = () => {
       <Header />
 
       <div className="lg:max-w-6xl lg:mx-auto max-w-3xl mx-4 my-8">
-        <div className="col-span-2 lg:w-2/3 flex flex-col justify-center items-start space-x-8 border  bg-white shadow-lg py-8 space-y-5 rounded">
+        <div className="col-span-2 lg:w-2/3 flex flex-col justify-center mx-auto items-start space-x-8 border  bg-white shadow-lg py-8 space-y-5 rounded">
           <div className="w-full border-b">
             <h1 className="text-2xl font-semibold px-4 pb-2">My Profile</h1>
           </div>
@@ -62,7 +62,7 @@ const Profile = () => {
         {/* If leaner need two packages */}
 
         {userData?.user_type === "learner" && (
-          <div className="flex lg:space-x-8 mt-8 lg:flex-row flex-col space-y-4 lg:space-y-0">
+          <div className="flex lg:space-x-8 mt-8 lg:flex-row flex-col space-y-4 lg:space-y-0 justify-center">
             <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
               <h2 className="text-sm tracking-widest title-font mb-1 font-medium">
                 START

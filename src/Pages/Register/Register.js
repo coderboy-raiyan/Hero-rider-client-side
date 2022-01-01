@@ -191,6 +191,7 @@ const Register = () => {
         number: data.number,
         vehicle_type: data.vehicle_type,
         user_type: "learner",
+        payment: "pending",
       };
 
       signUp(

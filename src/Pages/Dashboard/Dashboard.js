@@ -1,14 +1,23 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
-import { Container, ListGroup, Nav, Navbar, Offcanvas } from "react-bootstrap";
-import { MdRateReview } from "react-icons/md";
+import {
+  Col,
+  Container,
+  ListGroup,
+  Nav,
+  Navbar,
+  Offcanvas,
+  Row,
+} from "react-bootstrap";
 import { RiMenu3Line, RiShoppingCartLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
+import Admin from "./Admin/Admin";
+import Users from "./Users/Users";
 
 const Dashboard = () => {
-  const [isClicked, setIsClicked] = useState(false);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
+  let { path, url } = useRouteMatch();
   const handleShow = () => setShow(true);
   return (
     <>
@@ -18,7 +27,7 @@ const Dashboard = () => {
         className="border-bottom shadow-sm sticky-top"
       >
         <Container>
-          <Link className="navbar-brand fw-bold" to="/dashboard">
+          <Link className="navbar-brand fw-bold" to={`${url}`}>
             Dash Board
           </Link>
           <Nav className="ms-auto p-2">
@@ -38,14 +47,23 @@ const Dashboard = () => {
             <Offcanvas.Body className="p-0">
               <ListGroup>
                 <ListGroup.Item className="border-bottom border-0 text-center">
-                  <Link className="text-decoration-none text-secondary">
-                    <RiShoppingCartLine size={20} className="me-2 inline" />{" "}
-                    Make Admin
+                  <Link
+                    to={`${url}/users`}
+                    className="text-decoration-none text-secondary"
+                    onClick={() => handleClose()}
+                  >
+                    <RiShoppingCartLine size={20} className="me-2 inline" /> All
+                    Users
                   </Link>
                 </ListGroup.Item>
                 <ListGroup.Item className="border-bottom border-0 text-center">
-                  <Link className="text-decoration-none text-secondary">
-                    <MdRateReview size={20} className="me-2 inline" /> Reviews
+                  <Link
+                    to={`${url}/admin`}
+                    onClick={() => handleClose()}
+                    className="text-decoration-none text-secondary"
+                  >
+                    <RiShoppingCartLine size={20} className="me-2 inline" />{" "}
+                    Make Admin
                   </Link>
                 </ListGroup.Item>
               </ListGroup>
@@ -53,6 +71,26 @@ const Dashboard = () => {
           </Offcanvas>
         </>
       </Navbar>
+
+      <section>
+        <Container>
+          <Row>
+            <Col xs={12} md={12} lg={12}>
+              <Switch>
+                <Route exact path={path}>
+                  <Users />
+                </Route>
+                <Route path={`${path}/users`}>
+                  <Users />
+                </Route>
+                <Route path={`${path}/admin`}>
+                  <Admin />
+                </Route>
+              </Switch>
+            </Col>
+          </Row>
+        </Container>
+      </section>
     </>
   );
 };

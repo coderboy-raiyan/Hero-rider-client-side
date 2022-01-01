@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { Link, NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -7,6 +7,13 @@ import useAuth from "./../../../Hooks/useAuth";
 const Header = () => {
   const [isClicked, setIsClicked] = useState(false);
   const { user, logout } = useAuth();
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${user.email}`)
+      .then((res) => res.json())
+      .then((data) => setUserData(data));
+  }, [user]);
 
   const handelLogout = () => {
     Swal.fire({
@@ -30,13 +37,13 @@ const Header = () => {
     setIsClicked(!isClicked);
   };
   return (
-    <header className="bg-black border-b shadow-sm">
+    <header className="bg-white border-b shadow-sm">
       <nav className="lg:max-w-6xl lg:mx-auto  max-w-3xl mx-4 py-3 ">
         <div className="flex justify-between items-center">
           {/* left side */}
           <div>
             <Link to="">
-              <h1 className="text-2xl text-white">Hero Rider</h1>
+              <h1 className="text-2xl text-black">Hero Rider</h1>
             </Link>
           </div>
 
@@ -115,26 +122,31 @@ const Header = () => {
           {/* right side */}
           <div className="hidden lg:inline-flex">
             <ul className="flex items-center space-x-8">
-              <li className="header-menu">
-                <Link to="">Dashboard</Link>
-              </li>
               {user?.email ? (
-                <li className="flex items-center space-x-2 cursor-pointer">
-                  <div>
-                    <img
-                      className="w-10 h-10 rounded-full"
-                      src={user.photoURL}
-                      alt=""
-                    />
-                  </div>
-                  <p className="text-white">{user.displayName}</p>
-                  <button
-                    onClick={handelLogout}
-                    className="text-2xl hover:scale-110 text-white transition-all"
-                  >
-                    <FiLogOut />
-                  </button>
-                </li>
+                <>
+                  <li className="header-menu">
+                    <Link to="">Dashboard</Link>
+                  </li>
+                  <li className="header-menu text-sm border p-2 rounded-full">
+                    As a <Link to="">{userData?.user_type}</Link>
+                  </li>
+                  <li className="flex items-center space-x-2 cursor-pointer">
+                    <div>
+                      <img
+                        className="w-10 h-10 rounded-full"
+                        src={user.photoURL}
+                        alt=""
+                      />
+                    </div>
+                    <p className="text-black">{user.displayName}</p>
+                    <button
+                      onClick={handelLogout}
+                      className="text-2xl hover:scale-110 text-black transition-all"
+                    >
+                      <FiLogOut />
+                    </button>
+                  </li>
+                </>
               ) : (
                 <>
                   <li className="header-menu">

@@ -10,7 +10,7 @@ body {
 
 @layer components {
   .header-menu {
-    @apply text-white;
+    @apply text-black;
   }
   .primary-btn {
     @apply bg-black text-white px-4 py-2 text-sm hover:bg-transparent border border-transparent hover:text-black transform transition-all hover:border-black hover:border rounded-full;
